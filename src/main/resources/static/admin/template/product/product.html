@@ -1,0 +1,287 @@
+
+<!-- Products Table -->
+
+
+<div class="container-fluid pt-4 px-4">
+	<div class="col-12">
+		<div class="bg-secondary rounded h-100 p-4">
+
+			<nav>
+				<div class="nav nav-tabs" id="nav-tab" role="tablist">
+					<button class="nav-link active" id="nav-home-tab"
+						data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+						role="tab" aria-controls="nav-home" aria-selected="true">List</button>
+					<button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+						data-bs-target="#nav-profile" type="button" role="tab"
+						aria-controls="nav-profile" aria-selected="false">Edit</button>
+				</div>
+			</nav>
+			<div class="tab-content pt-3" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+					aria-labelledby="nav-home-tab">
+					<div class="container-fluid tgroup">
+						<div>
+							<h2>Products</h2>
+						</div>
+						<div>
+							<button type="button" class="btn btn-primary m-2">Import</button>
+							<button ng-click="Edit(newProduct)" type="button"
+								class="btn btn-primary m-2">New Product</button>
+						</div>
+					</div>
+					<input class="form-control mb-2" id="myInput" type="text"
+						placeholder="Search..">
+
+					<div class="table-responsive">
+						<table
+							class="table text-start align-middle table-bordered table-hover mb-0">
+							<thead>
+								<tr>
+									<th>STT</th>
+									<th scope="col"><input class="form-check-input"
+										type="checkbox"></th>
+									<th>ID</th>
+									<th>Product</th>
+									<th>Category</th>
+									<th>Quantity</th>
+									<th>Price</th>
+									<th>Active</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody id="myTable">
+								<tr ng-repeat="p in pager.items">
+									<td>{{$index + 1}}</td>
+									<td><input class="form-check-input" type="checkbox"></td>
+									<td>{{p.id}}</td>
+									<td><img src="/images/{{p.product_img1}}"
+										style="width: 52px; height: 52px;" /> {{p.product_name}}</td>
+									<td>{{p.productModel.productType.type_name}}</td>
+									<td>{{p.product_quantity}}</td>
+									<td>{{p.product_price}}</td>
+									<td>{{p.product_active?"Yes":"No"}}</td>
+									<td><div class="d-flex">
+											<button ng-click="Edit(p)" type="button"
+												class="btn btn-primary m-2">Edit</button>
+											<button type="button" class="btn btn-primary m-2"
+												ng-click="delete(p)">Remove</button>
+										</div></td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-end mt-2 mb-0">
+							<li class="page-item mx-1"><button class="btn btn-primary" ng-click="pager.first()">First</button></li>
+							<li class="page-item mx-1"><button class="btn btn-primary" ng-click="pager.prev()">Prev</button></li>
+							<li class="page-item mx-1"><button class="btn btn-primary" ng-click="pager.next()">Next</button></li>
+							<li class="page-item mx-1"><button class="btn btn-primary" ng-click="pager.last()">Last</button>
+							</li>
+						</ul>
+						<p class="pagination justify-content-end mt-2 mb-0"><strong>{{pager.page + 1}} of {{pager.count}}</strong></p>
+					</nav>
+				</div>
+				<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+					aria-labelledby="nav-profile-tab">
+					<div class="container-fluid px-4 tgroup">
+						<div>
+							<h2>Edit Product</h2>
+						</div>
+						<div>
+							<button type="button" class="btn btn-primary m-2">View
+								All</button>
+						</div>
+					</div>
+					<div
+						class="row min-vh-100 bg-secondary rounded justify-content-center mx-0">
+
+						<div class="col-sm-4 col-12 p-4 carousel" id="carouselExampleDark">
+							<div class="avatar-preview mb-3 carousel-item active">
+								<img ng-src="/images/{{ form.product_img1 }}" />
+								<div class="edit-avatar">
+									<input type="file"
+										onchange="angular.element(this).scope().imageChanged(this.files,1)" />
+									<i class="fa fa-cloud-upload-alt fa-2x text-primary"></i>
+								</div>
+
+							</div>
+							<div class="avatar-preview mb-3 carousel-item">
+								<img ng-src="/images/{{ form.product_img2 }}" />
+								<div class="edit-avatar">
+									<input type="file"
+										onchange="angular.element(this).scope().imageChanged(this.files,2)" />
+									<i class="fa fa-cloud-upload-alt fa-2x text-primary"></i>
+								</div>
+							</div>
+							<div class="avatar-preview mb-3 carousel-item">
+								<img ng-src="/images/{{ form.product_img3 }}" />
+								<div class="edit-avatar">
+									<input type="file"
+										onchange="angular.element(this).scope().imageChanged(this.files,3)" />
+									<i class="fa fa-cloud-upload-alt fa-2x text-primary"></i>
+								</div>
+							</div>
+							<div class="avatar-preview mb-3 carousel-item">
+								<img ng-src="/images/{{ form.product_img4 }}" />
+								<div class="edit-avatar">
+									<input type="file"
+										onchange="angular.element(this).scope().imageChanged(this.files,4)" />
+									<i class="fa fa-cloud-upload-alt fa-2x text-primary"></i>
+								</div>
+							</div>
+
+							<div class="row pt-2 indicators-custom">
+								<div class="col-3">
+									<div class="avatar-preview">
+										<img ng-src="/images/{{ form.product_img1 }}"
+											data-bs-target="#carouselExampleDark" data-bs-slide-to="0"
+											class="active" aria-current="true" aria-label="Slide 1" />
+										<div class="edit-avatar">
+											<input type="file"
+												onchange="angular.element(this).scope().imageChanged(this.files,1)" />
+											<i class="fa fa-cloud-upload-alt  text-primary"></i>
+										</div>
+									</div>
+								</div>
+								<div class="col-3">
+									<div class="avatar-preview">
+										<img ng-src="/images/{{ form.product_img2 }}"
+											data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+											aria-label="Slide 2" />
+										<div class="edit-avatar">
+											<input type="file"
+												onchange="angular.element(this).scope().imageChanged(this.files,2)" />
+											<i class="fa fa-cloud-upload-alt  text-primary"></i>
+										</div>
+									</div>
+								</div>
+								<div class="col-3">
+									<div class="avatar-preview">
+										<img ng-src="/images/{{ form.product_img3 }}"
+											data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+											aria-label="Slide 3" />
+										<div class="edit-avatar">
+											<input type="file"
+												onchange="angular.element(this).scope().imageChanged(this.files,3)" />
+											<i class="fa fa-cloud-upload-alt  text-primary"></i>
+										</div>
+									</div>
+								</div>
+								<div class="col-3">
+									<div class="avatar-preview">
+										<img ng-src="/images/{{ form.product_img4 }}"
+											data-bs-target="#carouselExampleDark" data-bs-slide-to="3"
+											aria-label="Slide 4" />
+										<div class="edit-avatar">
+											<input type="file"
+												onchange="angular.element(this).scope().imageChanged(this.files,4)" />
+											<i class="fa fa-cloud-upload-alt  text-primary"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<h4 class="mt-4">Product Info:</h4>
+							<textarea class="form-control"
+								style="width: 100%; word-wrap: break-word; overflow-wrap: break-word;"
+								rows="5" id="productInfo" ng-model="form.product_info">
+								
+							</textarea>
+
+							<h4 class="mt-4">Benefits:</h4>
+							<textarea class="form-control"
+								style="width: 100%; word-wrap: break-word; overflow-wrap: break-word;"
+								rows="5" id="productBenefits" ng-model="form.product_benefits">
+								
+							</textarea>
+
+						</div>
+						<div class="col-sm-8 col-12 p-4 ">
+							<form>
+								<div class="mb-3 row">
+									<div class="col-12">
+										<label>Product Name</label> <input type="text"
+											class="form-control" ng-model="form.product_name">
+									</div>
+								</div>
+								<div class="mb-3 row">
+									<div class="col-8">
+										<div class="col-8">
+											<label>Category</label> <select
+												ng-model="form.productModel.productType.id"
+												ng-change="editCategoryProductDesc(form.productModel.productType.id)"
+												class="form-select mb-3" aria-label="Default select example">
+												<option ng-repeat="c in cates" ng-value="c.id">{{c.type_name}}</option>
+
+											</select> <label>Model</label> <select
+												ng-model="form.productModel.modelname"
+												class="form-select mb-3" aria-label="Default select example">
+												<option ng-repeat="m in models" ng-value="m.modelname">{{m.modelname}}</option>
+											</select> <label>Brand</label> <select
+												ng-model="form.productModel.productBrand.id"
+												class="form-select mb-3" aria-label="Default select example">
+												<option ng-repeat="b in brands" ng-value="b.id">{{b.brand_name}}</option>
+											</select> <label>Notes</label> <input type="text"
+												class="form-control mb-3" ng-model="form.product_notes">
+
+
+										</div>
+									</div>
+									<div class="col-4">
+										<label>Price</label>
+										<div class="input-group mb-3">
+											<input type="text" class="form-control"
+												aria-label="Amount (to the nearest dollar)"
+												ng-model="form.product_price"> <span
+												class="input-group-text">.VND</span>
+										</div>
+										<label>Quantity</label>
+										<div class="input-group mb-3">
+											<input type="text" class="form-control"
+												ng-model="form.product_quantity">
+
+										</div>
+										<div class="col-12">
+											<label>Gift</label> <input type="text"
+												class="form-control mb-3" ng-model="form.product_gifts">
+
+										</div>
+										<div class="mt-5 form-check">
+											<input type="checkbox" class="form-check-input"
+												id="exampleCheck1" ng-model="form.product_active"> <label
+												class="form-check-label" for="exampleCheck1">Active
+												?</label>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<h4 class="mx-4">Product Detail:</h4>
+					<div class="px-4" id="productDesc"></div>
+					<div
+						class="px-4 d-flex justify-content-md-end justify-content-center">
+						<button type="button" class="btn btn-primary m-2"
+							ng-click="create()">
+							<i class="fa fa-plus"></i> Create
+						</button>
+						<button type="button" class="btn btn-primary m-2"
+							ng-click="update()">
+							<i class="fa fa-marker"></i> Update
+						</button>
+						<button type="button" class="btn btn-primary m-2"
+							ng-click="delete(form)">
+							<i class="fa fa-trash"></i> Delete
+						</button>
+						<button type="button" class="btn btn-primary m-2"
+							ng-click="reset()">
+							<i class="fa fa-retweet"></i> Reset
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- Products Table -->

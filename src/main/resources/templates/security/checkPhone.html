@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form-Login</title>
+    <link type="text/css" rel="stylesheet" href="/css/login.css">
+    <!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+</head>
+<body>
+    <div id = "wrapper">
+        <form action="/login/checkPhone" id="form-login" method = "post">
+            <h1 class="form-heading">Nhập Số Điện Thoại</h1>
+            <div class="form-group">
+                <i class=" fa fa-phone"></i>
+                <input type="number" class="form-input" placeholder="Nhập số điện thoại mua hàng" name="phoneNumber" id="phoneNumber" required>
+            </div>
+            <input type="submit" value="Continute" class="form-submit">
+            <div class="custom-icons">
+                <a href="#"><ion-icon name="logo-apple"></ion-icon></a>
+                <div style="width: 20px;"></div>
+                <a href="#"><ion-icon name="logo-microsoft"></ion-icon></a>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+</body>
+</html>

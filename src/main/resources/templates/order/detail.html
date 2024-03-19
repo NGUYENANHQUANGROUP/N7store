@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main th:object="${ORDER}">
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<h1>Order Detail</h1>
+
+					<div class="col-sm-12 col-md-10 col-md-offset-1">
+						<span>Order Id: #[(*{id})]</span>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Product</th>
+									<th>Quantity</th>
+									<th class="text-center">Price</th>
+									<th class="text-center">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="detail:*{orderDetails}" th:object="${detail}">
+									<td class="col-sm-8 col-md-6">
+										<div class="media">
+											<a class="thumbnail pull-left" href="#"> <img
+												class="media-object"
+												th:src="@{|/images/*{product.product_img1}|}"
+												style="width: 72px; height: 72px;">
+											</a>
+											<div class="media-body">
+												<h4 class="media-heading">
+													<a href="#">[(*{product.product_name})]</a>
+												</h4>
+												<h5 class="media-heading">
+													Brand: <a href="#">[(*{product.productModel.productBrand.brand_name})]</a>
+												</h5>
+
+											</div>
+										</div>
+									</td>
+									<td class="col-sm-1 col-md-1" style="text-align: center">
+										<input class="form-control" th:value="*{quantity}">
+									</td>
+									<td class="col-sm-1 col-md-1 text-center"><strong>[(*{#numbers.formatDecimal(price,
+											3,'POINT', 0, 'COMMA')})]</strong></td>
+									<td class="col-sm-1 col-md-1 text-center"><strong>[(*{#numbers.formatDecimal(price*quantity,
+											3,'POINT', 0, 'COMMA')})]<sup>đ</sup>
+									</strong></td>
+
+								</tr>
+								<tr>
+									<td> </td>
+									<td> </td>
+									<td>
+										<h3>Total</h3>
+									</td>
+									<td class="text-right">
+										<h3>
+											<strong>[(${#numbers.formatDecimal(ORDER_AMOUNT,
+												3,'POINT', 0, 'COMMA')})]<sup>đ</sup>
+											</strong>
+										</h3>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+
+					<h1>Order List</h1>
+					<table class="table" th:object="${ACCOUNT}">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">ID</th>
+								<th scope="col">Address</th>
+								<th scope="col">Phone Number</th>
+								<th scope="col">Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="order:*{orders}" th:object="${order}">
+								<th scope="row">1</th>
+								<td>[(*{id})]</td>
+								<td>[(*{address})]</td>
+								<td>[(*{phonenumber})]</td>
+								<td>[(*{createDate})]</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+	</main>
+</body>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form-Login</title>
+    <link type="text/css" rel="stylesheet" href="/css/login.css">
+    <!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+</head>
+<body>
+    <div id = "wrapper">
+        <form action="login/check" id="form-login" method = "post">
+            <h1 class="form-heading">Form dang nhap</h1>
+            <div class="form-group">
+                <i class=" fa fa-user-o"></i>
+                <input type="text" class="form-input" placeholder="Ten dang nhap" name="username" id="username" required>
+            </div>
+            <div class="form-group">
+                <i class="fa fa-key"></i>
+                <input type="password" class="form-input" placeholder="mat khau" name="password" id="password" required>
+                <div id="eye">
+                    <i class="fa fa-eye-slash"></i>
+                </div>
+            </div>
+            <div class="remember-forgot">
+                <span><input type="checkbox" name="" id="">Remember me</span>
+                <a href="">Forgot Password ?</a>
+            </div>
+            <input type="submit" value="dang nhap" class="form-submit">
+            <div class="register-link">
+                <span>Don't have an account ?</span><div style="width: 10px;"></div><a href="">Register</a>
+            </div>
+            <div class="line-text">
+                <div class="line"></div>
+                <span class="text" style="margin: 0 10px;">Or connect with</span>
+                <div class="line"></div>
+            </div>
+            <div class="custom-icons">
+                <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                <div style="width: 20px;"></div>
+                <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+</body>
+</html>

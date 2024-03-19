@@ -1,0 +1,131 @@
+body{
+    background: url('/images/ECommerce.jpg');
+    background-size: cover;
+    background-position-y: -60px;
+    font-size: 16px;
+}
+#wrapper{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#form-login{
+    max-width: 400px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0 , 0.8);
+    flex-grow: 1;
+    padding: 30px 30px 40px;
+    box-shadow: 0px 0px 17px 2px rgba(209, 0, 35, 0.8);
+}
+.form-heading{
+    font-size: 25px;
+    color: #f5f5f5;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.form-group{
+    border-bottom: 1px solid #d10023;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    display: flex;
+}
+.form-group i{
+    color: #fff;
+    font-size: 14px;
+    padding-top: 5px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+}
+.form-input{
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: #d10023;
+    flex-grow: 1;
+}
+.form-input::placeholder{
+    color: #f5f5f5;
+}
+#eye i{
+    padding-right: 0;
+    cursor: pointer;
+}
+.remember-forgot{
+    display: flex;
+    justify-content: space-between;
+}
+.remember-forgot a{
+    text-decoration: none;
+    color: #f5f5f5;
+}
+.remember-forgot a:hover{
+    color: #d10023;
+}
+.remember-forgot span{
+    color: #f5f5f5;
+}
+.form-submit{
+    background: transparent;
+    border: 1px solid #d10023;
+    border-radius: 50px;
+    color: #fff;
+    width: 100%;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    transition: 0.25s ease-in-out;
+    margin-top: 30px;
+}
+.form-submit:hover{
+    box-shadow: 0px 0px 17px 2px rgba(209, 0, 35, 0.8);
+}
+
+.line-text{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+.line-text .line {
+    margin-top: 9px;
+    flex-grow: 1;
+    height: 1px;
+    background-color: #d10023;
+}
+.line-text .text{
+    color: #f5f5f5;
+}
+
+.custom-icons{
+    display: flex;
+    justify-content: center;
+}
+.custom-icons a{
+    text-decoration: none;
+    color: #fff;
+}
+.custom-icons ion-icon{
+    color: #fff;
+    font-size: 35px;
+    padding-top: 20px;
+    transition: 0.3s ease;
+}
+.custom-icons ion-icon:hover{
+    color: #d10023;
+}
+.register-link{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    
+}
+.register-link a{
+    font-weight: bold;
+    text-decoration: none;
+    color: #f5f5f5;
+}
+.register-link a:hover{
+    color: #d10023;
+}
+.register-link span{
+    color: #f5f5f5;
+}

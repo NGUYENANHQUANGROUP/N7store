@@ -1,0 +1,83 @@
+
+<div class="container-fluid pt-4 px-4">
+	<div class="col-12">
+		<div class="bg-secondary rounded h-100 p-4">
+
+			<nav>
+				<div class="nav nav-tabs" id="nav-tab" role="tablist">
+					<button class="nav-link active" id="nav-home-tab"
+						data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+						role="tab" aria-controls="nav-home" aria-selected="true">List</button>
+					<button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+						data-bs-target="#nav-profile" type="button" role="tab"
+						aria-controls="nav-profile" aria-selected="false">Edit</button>
+				</div>
+			</nav>
+			<div class="tab-content pt-3" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+					aria-labelledby="nav-home-tab">
+					<div class="container-fluid tgroup">
+						<div>
+							<h2>Admin</h2>
+						</div>
+						<div>
+							
+							<button type="button"
+								class="btn btn-primary m-2">New Admin</button>
+						</div>
+					</div>
+					<input class="form-control mb-2" id="myInput" type="text"
+						placeholder="Search..">
+
+					<div class="table-responsive">
+						<table
+							class="table text-start align-middle table-bordered table-hover mb-0">
+							<thead>
+								<tr>
+									<th></th>
+									<th ng-repeat = "role in roles">{{role.name}}</th>
+								</tr>
+							</thead>
+							<tbody id="myTable">
+								<tr ng-repeat="acc in admins">
+									<td>{{acc.fullname}}</td>
+									<td ng-repeat = "role in roles">
+										<input ng-checked="authority_of(acc,role)" ng-click="authority_changed(acc,role)" type="checkbox" />
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-end mt-2 mb-0">
+							<li class="page-item mx-1"><button class="btn btn-primary" ng-click="pager.first()">First</button></li>
+							<li class="page-item mx-1"><button class="btn btn-primary" ng-click="pager.prev()">Prev</button></li>
+							<li class="page-item mx-1"><button class="btn btn-primary" ng-click="pager.next()">Next</button></li>
+							<li class="page-item mx-1"><button class="btn btn-primary" ng-click="pager.last()">Last</button>
+							</li>
+						</ul>
+						<p class="pagination justify-content-end mt-2 mb-0"><strong>{{pager.page + 1}} of {{pager.count}}</strong></p>
+					</nav>
+				</div>
+				<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+					aria-labelledby="nav-profile-tab">
+					<div class="col-sm-12">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Testimonial</h6>
+                            
+                                <div class="testimonial-item text-center">
+                                    <img class="img-fluid rounded-circle mx-auto mb-4" src="/admin/img/testimonial-1.jpg" style="width: 100px; height: 100px;">
+                                    <h5 class="mb-1">Client Name</h5>
+                                    <p>Profession</p>
+                                    <p class="mb-0">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                                </div>
+                            
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

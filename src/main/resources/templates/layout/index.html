@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="/css/slick.css" />
+	<link type="text/css" rel="stylesheet" href="/css/slick-theme.css" />
+
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="/css/nouislider.min.css" />
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="/css/style.css" />
+
+		<!-- AnggularJs-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body ng-app = "shopping-cart-app" ng-controller = "shopping-cart-ctrl">
+
+	<header th:replace="/layout/header.html"></header> <!-- NHUNG HEADER -->
+
+	<div th:replace="${main}"></div> <!-- main: tên fragment.... Nội dung phần thân -->
+
+	<footer th:replace="/layout/footer.html"></footer> <!-- Nhúng footer -->
+
+
+	<!-- jQuery Plugins -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/slick.min.js"></script>
+	<script src="/js/nouislider.min.js"></script>
+	<script src="/js/jquery.zoom.min.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/shopping-cart-app.js"></script>
+	
+		<script>
+		function productFilter() {
+			console.log("productFilter is called");
+		    // Lấy giá trị các input
+		    var categories = [];
+		    var cateCheckboxes = document.querySelectorAll("input[name='categories']:checked");
+		    cateCheckboxes.forEach(function(checkbox) {
+		        categories.push(checkbox.value);
+		    });
+		    var brands = [];
+		    var brandCheckboxes = document.querySelectorAll("input[name='brands']:checked");
+		    brandCheckboxes.forEach(function(checkbox) {
+		    	brands.push(checkbox.value);
+		    });
+		    var minPrice = document.getElementById("price-min").value;
+		    var maxPrice = document.getElementById("price-max").value;
+		
+		    // Tạo URL truy vấn
+		    var url = "/product/filter?";
+		    if (categories.length > 0) {
+		        url += "categories=" + categories.join(",") + "&";
+		    }
+		    if (brands.length > 0) {
+		        url += "brands=" + brands.join(",") + "&";
+		    }
+		    if (minPrice) {
+		        url += "minPrice=" + minPrice + "&";
+		    }
+		    if (maxPrice) {
+		        url += "maxPrice=" + maxPrice;
+		    }
+		    
+		    var xhr = new XMLHttpRequest();
+		    xhr.open("GET", url, true);
+		    console.log("cscsc"+ url);
+		    xhr.onreadystatechange = function() {
+		        if (xhr.readyState === 4 && xhr.status === 200) {
+		            var response = xhr.responseText;
+		            var parser = new DOMParser();
+		            var html = parser.parseFromString(response, "text/html");
+		            console.error("thanh công Mã trạng thái: " + xhr.status);
+		            var displayProduct = document.querySelector(".displayProduct");
+		            displayProduct.innerHTML = html.querySelector(".displayProduct").innerHTML;
+		        } else {
+		            console.error("Yêu cầu không thành công. Mã trạng thái: " + xhr.status);
+		        }
+		    };
+		    
+		    xhr.send();
+		    
+		}
+	</script>
+	
+</body>
+
+</html>

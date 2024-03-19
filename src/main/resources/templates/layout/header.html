@@ -1,0 +1,287 @@
+
+<div xmlns:th="http://www.thymeleaf.org">
+	<!-- HEADER -->
+	<header>
+		<!-- TOP HEADER -->
+		<div id="top-header">
+			<div class="container">
+				<ul class="header-links pull-left">
+					<li><a href="#"><i class="fa fa-phone"></i>0915416075</a></li>
+					<li><a href="#"><i class="fa fa-envelope-o"></i>n7shop@email.com</a></li>
+					<li><a href="#"><i class="fa fa-map-marker"></i> P. Tân
+							Chánh Hiệp, Q.12, TP.HCM, Việt Nam</a></li>
+				</ul>
+				<ul class="header-links pull-right">
+					<th:block th:unless="${#request.remoteUser}">
+						<li><a href="/login"><i class="fa fa-key"></i>Login</a></li>
+					</th:block>
+					<th:block th:if="${#request.remoteUser}">
+						<li><a href="#"><i class="fa fa-user-o"></i>[[${#request.remoteUser}]]</a></li>
+					</th:block>
+					<th:block
+						th:if="${#request.isUserInRole('DIRE')or #request.isUserInRole('STAF')}">
+						<li><a href="/admin"><i class="fa fa-user-o"></i>Administration</a></li>
+					</th:block>
+				</ul>
+			</div>
+		</div>
+		<!-- /TOP HEADER -->
+
+		<!-- MAIN HEADER -->
+		<div id="header">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- LOGO -->
+					<div class="col-md-3">
+						<div class="header-logo">
+							<a href="/home" class="logo"> <img src="/images/logo/n7store.png"
+								alt="">
+							</a>
+						</div>
+					</div>
+					<!-- /LOGO -->
+
+					<!-- SEARCH BAR -->
+					<div class="col-md-6">
+						<div class="header-search">
+							<form action="/product/list">
+								<select class="input-select" id="typeId" name="typeId">
+									<option value=0>All Categories</option>
+									<option th:each="t:${TYPES}"  th:value="${t.id}" th:text="${t.type_name}"></option>
+								</select> <input class="input" name="keyword" th:value="${keyword}" placeholder="Search here">
+								<button type="submit" class="search-btn">Search</button>
+							</form>
+						</div>
+					</div>
+					<!-- /SEARCH BAR -->
+
+					<!-- ACCOUNT -->
+					<div class="col-md-3 clearfix">
+						<div class="header-ctn">
+							
+							<!-- Cart -->
+							<div class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown"
+									aria-expanded="true"> <i class="fa fa-shopping-cart"></i> <span>Your
+										Cart</span>
+									<div class="qty">{{cart.count}}</div>
+								</a>
+								<div class="cart-dropdown">
+									<div class="cart-list">
+										<div class="product-widget" ng-repeat = "item in cart.items">
+											<div class="product-img">
+												<img src="/images/{{item.product_img1}}" alt="">
+											</div>
+											<div class="product-body">
+												<h3 class="product-name">
+													<a href="#">{{item.product_name}}</a>
+												</h3>
+												<h4 class="product-price">
+													<span class="qty">{{item.qty}}x</span>{{item.product_price | number}}<sup>đ</sup>
+												</h4>
+											</div>
+											<button class="delete" ng-click = "cart.remove(item.id)">
+												<i class="fa fa-close"></i>
+											</button>
+										</div>
+
+									</div>
+									<div class="cart-summary">
+										<small>{{cart.count}} Item(s) selected</small>
+										<h5>SUBTOTAL:{{cart.amount | number}}<sup>đ</sup></h5>
+									</div>
+									<div class="cart-btns">
+										<a th:href="@{/cart}">View Cart</a> <a href="/order/checkout">Checkout <i
+											class="fa fa-arrow-circle-right"></i></a>
+									</div>
+								</div>
+							</div>
+							<!-- /Cart -->
+
+							<!-- Menu Toogle -->
+							<div class="menu-toggle">
+								<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
+								</a>
+							</div>
+							<!-- /Menu Toogle -->
+						</div>
+					</div>
+					<!-- /ACCOUNT -->
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</div>
+		<!-- /MAIN HEADER -->
+	</header>
+	<!-- /HEADER -->
+
+	<!-- NAVIGATION -->
+	<nav id="navigation">
+		<!-- container -->
+		<div class="container">
+			<!-- responsive-nav -->
+			<div id="responsive-nav">
+				<!-- NAV -->
+				<ul class="main-nav nav navbar-nav">
+					<li class="active"><a href="/home">Home</a></li>
+					<li><a href="/product/list?typeId=0&&keyword=">All Categories</a></li>
+					<li th:each="t:${TYPES}"><a
+						th:href="@{|/product/list?typeId=${t.id}&&keyword=|}">[(${t.type_name})]</a> 
+						<th:block
+							th:if="${t.type_name == 'Laptop'}">
+							<ul class="sub-menu row">
+								<div class="col-xs-4">
+									<h4>Thương Hiệu</h4>
+									<li><a href="/product/list?typeId=1&&keyword=">Tất Cả</a></li>
+									<li><a href="/product/list?typeId=1&&keyword=Asus">Asus</a></li>
+									<li><a href="/product/list?typeId=1&&keyword=Acer">Acer</a></li>
+									<li><a href="/product/list?typeId=1&&keyword=MSI">MSI</a></li>
+									<li><a href="/product/list?typeId=1&&keyword=Lenovo">Lenovo</a></li>
+								</div>
+								<div class="col-xs-4">
+									<h4>Thương Hiệu</h4>
+									<li><a href="/product/list?typeId=1&&keyword=Dell">Dell</a></li>
+									<li><a href="/product/list?typeId=1&&keyword=HP">HP</a></li>
+									<li><a href="/product/list?typeId=1&&keyword=Gigabyte">Gigabyte</a></li>
+									<li><a href="/product/list?typeId=1&&keyword=Apple">Apple (Macbook)</a></li>
+								</div>
+								<div class="col-xs-4">
+									<h4>Mức Giá</h4>
+									<li><a href="">Dưới 20 triệu</a></li>
+									<li><a href="">Từ 20 đến 25 triệu</a></li>
+									<li><a href="">Từ 25 đến 30 triệu</a></li>
+									<li><a href="">Trên 30 triệu</a></li>
+								</div>
+							</ul>
+						</th:block>
+						<th:block
+							th:if="${t.type_name == 'Linh kiện'}">
+							<ul class="sub-menu row">
+								<div class="col-xs-4">
+									<h4>VGA - Card màn hình</h4>
+									<li><a href="/product/list?typeId=2&&keyword=RTX Ada 4090">RTX Ada 4090</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=RTX Ada 4080">RTX Ada 4080</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=RTX Ada 4070 Ti">RTX Ada 4070 Ti</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=RTX Ada 4070">RTX Ada 4070</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=NVIDIA Quadro">NVIDIA Quadro</a></li>
+									<h4>CPU - AMD</h4>
+									<li><a href="/product/list?typeId=2&&keyword=AMD Ryzen 9">AMD Ryzen 9</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=AMD Ryzen 7">AMD Ryzen 7</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=AMD Ryzen 5">AMD Ryzen 5</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=AMD Ryzen 3">AMD Ryzen 3</a></li>
+									
+								</div>
+								<div class="col-xs-4">
+									<h4>VGA - Card màn hình</h4>
+									<li><a href="/product/list?typeId=2&&keyword=RTX Ampere 3060">RTX Ampere 3060</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=RTX Ampere 3050">RTX Ampere 3050</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=RTX Ampere 2060">RTX Ampere 2060</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=GTX 1650">GTX 1650</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=AMD Radeon RX">AMD Radeon RX</a></li>
+									<h4>Bo mạch chủ Intel</h4>
+									<li><a href="/product/list?typeId=2&&keyword=Intel H510">Intel H510</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=Intel H610">Intel H610</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=Intel B660">Intel B660</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=Intel B760">Intel B760</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=Intel Z790">Intel Z790</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=">Xem tất cả</a></li>
+									
+								</div>
+								<div class="col-xs-4">
+									<h4>CPU - Intel</h4>
+									<li><a href="/product/list?typeId=2&&keyword=Intel Core i9">Intel Core i9</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=Intel Core i7">Intel Core i7</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=Intel Core i5">Intel Core i5</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=Intel Core i3">Intel Core i3</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=Intel Xeon">Intel Xeon</a></li>
+									<h4>Bo mạch chủ AMD</h4>
+									<li><a href="/product/list?typeId=2&&keyword=AMD X570">AMD X570</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=AMD B650">AMD B650 (Mới)</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=AMD B550">AMD B550</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=AMD A320">AMD A320</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=AMD TRX40">AMD TRX40</a></li>
+									<li><a href="/product/list?typeId=2&&keyword=">Xem tất cả</a></li>
+									
+								</div>
+							</ul>
+						</th:block>
+						<th:block
+							th:if="${t.type_name == 'Màn hình'}">
+							<ul class="sub-menu row">
+								<div class="col-xs-4">
+									<h4>Hãng sản xuất</h4>
+									<li><a href="/product/list?typeId=3&&keyword=Acer">Acer</a></li>
+									<li><a href="/product/list?typeId=3&&keyword=Asus">Asus</a></li>
+									<li><a href="/product/list?typeId=3&&keyword=LG">LG</a></li>
+									<li><a href="/product/list?typeId=3&&keyword=MSI">MSI</a></li>
+									<li><a href="/product/list?typeId=3&&keyword=Samsung">Samsung</a></li>
+									<li><a href="/product/list?typeId=3&&keyword=Xiaomi">Xiaomi</a></li>
+								</div>
+								<div class="col-xs-4">
+									<h4>Độ phân giải</h4>
+									<li><a href="/product/list?typeId=3&&keyword=Full HD">Full HD</a></li>
+									<li><a href="/product/list?typeId=3&&keyword=2K">2K QHD</a></li>
+									<li><a href="/product/list?typeId=3&&keyword=4K">4K UHD</a></li>
+								</div>
+								<div class="col-xs-4">
+									<h4>Tần số quét</h4>
+									<li><a href="/product/list?typeId=3&&keyword=60Hz">60Hz</a></li>
+									<li><a href="/product/list?typeId=3&&keyword=75Hz">75Hz</a></li>
+									<li><a href="/product/list?typeId=3&&keyword=100Hz">100Hz</a></li>
+									<li><a href="/product/list?typeId=3&&keyword=144Hz">144Hz</a></li>
+									<li><a href="/product/list?typeId=3&&keyword=240Hz">240Hz</a></li>
+								</div>
+							</ul>
+						</th:block>
+						<th:block
+							th:if="${t.type_name == 'Phụ kiện'}">
+							<ul class="sub-menu row">
+								<div class="col-xs-3">
+									<h4>Tai Nghe</h4>
+									<li><a href="/product/list?typeId=4&&keyword=Logitech">Logitech</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=HyperX">HyperX</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=Razer">Razer</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=Sony">Sony</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=Dare-U">Dare-U</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=Rapoo">Rapoo</a></li>
+									
+								</div>
+								<div class="col-xs-3">
+									<h4>Thẻ nhớ - USB</h4>
+									<li><a href="/product/list?typeId=4&&keyword=Sandisk">Sandisk</a></li>
+									
+								</div>
+								<div class="col-xs-3">
+									<h4>Chuột</h4>
+									<li><a href="/product/list?typeId=4&&keyword=Logitech">Logitech</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=HyperX">HyperX</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=Razer">Razer</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=Asus">Asus</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=Dare-U">Dare-U</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=Rapoo">Rapoo</a></li>
+								</div>
+								<div class="col-xs-3">
+									<h4>Bàn phím</h4>
+									<li><a href="/product/list?typeId=4&&keyword=Akko">Akko</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=Logitech">Logitech</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=Asus">Asus</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=Razer">Razer</a></li>
+									<li><a href="/product/list?typeId=4&&keyword=Leopold">Leopold</a></li>
+									
+								</div>
+							</ul>
+						</th:block></li>
+					
+				</ul>
+				<!-- /NAV -->
+			</div>
+			<!-- /responsive-nav -->
+		</div>
+		<!-- /container -->
+	</nav>
+	<!-- /NAVIGATION -->
+
+</div>

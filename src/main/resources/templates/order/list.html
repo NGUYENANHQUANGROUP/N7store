@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main>
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<h1>Order List</h1>
+					<table class="table" th:object="${ACCOUNT}">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">ID</th>
+								<th scope="col">Address</th>
+								<th scope="col">Phone Number</th>
+								<th scope="col">Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="order:*{orders}" th:object="${order}">
+								<th scope="row">1</th>
+								<td>[(*{id})]</td>
+								<td>[(*{address})]</td>
+								<td>[(*{phonenumber})]</td>
+								<td>[(*{createDate})]</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+	</main>
+</body>
